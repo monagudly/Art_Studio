@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lesson Pathway Studio</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fbf6ee;--card:#fff;--ink:#2b2118;--mut:#6f6254;--line:#e8dccb;--acc:#c2410c;--acc2:#0f766e;--soft:#fff1e3;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#18130f;--card:#241d17;--ink:#f4ebe0;--mut:#b5a794;--line:#3a2f25;--acc:#fb923c;--acc2:#2dd4bf;--soft:#2e2218;}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#18130f;--card:#241d17;--ink:#f4ebe0;--mut:#b5a794;--line:#3a2f25;--acc:#fb923c;--acc2:#2dd4bf;--soft:#2e2218;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+.hero{background:linear-gradient(135deg,#c2410c,#9a3412 55%,#0f766e);color:#fff;border-radius:20px;padding:28px 24px;margin-bottom:18px}
+.hero small{letter-spacing:.14em;text-transform:uppercase;opacity:.85;font:600 12px system-ui,sans-serif}
+.hero h1{margin:6px 0 8px;font-size:clamp(26px,5vw,38px);line-height:1.15}
+.hero p{margin:0;opacity:.95;max-width:62ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:14px 0}
+h2{margin:0 0 4px;font-size:20px}h2 span{color:var(--acc)}
+.sub{color:var(--mut);margin:0 0 14px;font-size:14.5px}
+label{display:block;font:600 13px system-ui,sans-serif;color:var(--mut);margin:10px 0 4px}
+input,textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,sans-serif}
+textarea{min-height:84px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.m{border:1.5px solid var(--line);border-radius:14px;padding:12px;background:var(--bg);display:flex;flex-direction:column;gap:6px}
+.m b{font-size:15px}.m .e{font-size:24px}
+.m p{margin:0;font-size:13.5px;color:var(--mut);flex:1}
+.m.on{border-color:var(--acc2);background:var(--soft)}
+button{font:600 14px system-ui,sans-serif;border:0;border-radius:10px;padding:9px 14px;cursor:pointer;background:var(--acc);color:#fff}
+button.g{background:transparent;color:var(--ink);border:1px solid var(--line);padding:5px 9px}
+.m button{background:var(--acc2);color:#062b27}.m.on button{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.step{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:start;border:1px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:var(--bg)}
+.num{width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font:700 14px system-ui}
+.step textarea{min-height:56px;margin-top:6px}
+.ctl{display:flex;gap:4px}
+.up{margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}.up .lb{font:600 12.5px system-ui;color:var(--mut);margin:0 0 6px}.up input[type=file]{padding:6px;font-size:13px}.up input[type=url]{margin-top:6px}.fl{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.fi{border:1px solid var(--line);border-radius:10px;padding:6px;background:var(--card);max-width:200px;font:12px system-ui}.fi img,.fi video{max-width:100%;max-height:120px;border-radius:6px;display:block}.fi audio{width:100%}.empty{color:var(--mut);font-style:italic;padding:8px 0}
+.q{margin:14px 0 0}.q b{font-weight:600}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.tip{background:var(--soft);border-left:4px solid var(--acc);border-radius:8px;padding:10px 14px;font-size:14px;margin:10px 0}
+.hide{display:none}
+.top{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
+.resp{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:var(--bg);font:14px/1.5 system-ui,sans-serif}
+.resp h3{margin:0 0 4px;font:700 16px Georgia,serif}
+.pill{display:inline-block;background:var(--acc2);color:#062b27;border-radius:99px;padding:1px 10px;font-size:12px;margin:2px 4px 2px 0}
+.msg{font:14px system-ui;color:var(--mut)}
+</style></head><body><div class="wrap">
+
+<div class="top"><button class="g" id="tabP">Participant view</button><button class="g" id="tabF">Facilitator</button></div>
+
+<div id="player">
+<div class="hero"><small>Design activity</small><h1>Build your own lesson pathway</h1>
+<p>Pick a concept from your subject, choose creative methods, arrange them into a pathway, then reflect on your choices.</p></div>
+
+<div class="card"><h2><span>1.</span> Your details</h2><p class="sub">So we can connect your pathway to you.</p>
+<label>Name</label><input id="name">
+<label>Parent subject / subject you can teach</label><input id="subject" placeholder="e.g. Mathematics, EVS, Science">
+<label>Concept or topic</label><input id="concept" placeholder="e.g. Fractions, Water cycle, Photosynthesis">
+<label>Class / level</label><input id="level" placeholder="e.g. Class 6">
+</div>
+
+<div class="card"><h2><span>2.</span> Lesson components</h2>
+<p class="sub">Each box is a method of art-based pedagogy. Tap <b>Add</b> on the ones that fit your concept. Use as few or as many as you need, then design the lesson through them.</p>
+<div class="grid" id="grid"></div></div>
+
+<div class="card"><h2><span>3.</span> Your lesson pathway</h2>
+<p class="sub">Arrange the order in which learners will meet your chosen methods, and note what happens in each step. You can also attach your own image, video, audio or animation to any step.</p>
+<div id="path"></div></div>
+
+<div class="card"><h2><span>4.</span> Reflect</h2>
+<p class="sub">Answer in your own words. There are no right or wrong answers.</p>
+<div id="qs"></div>
+<div class="row"><button id="submit">Submit my pathway</button><button class="g" id="copy">Copy as text</button><span class="msg" id="status"></span></div></div>
+</div>
+
+<div id="fac" class="hide">
+<div class="hero"><small>Coordinator</small><h1>Participant responses</h1><p>Responses appear here live as participants submit. Only the page owner can see them.</p></div>
+<div id="facBody" class="card"><p class="msg">Loading…</p></div>
+</div>
+
+</div>
+<script>
+const METHODS=[
+["📖","Storytelling","Wrap the concept in a narrative with characters, a problem and a resolution so ideas stick through meaning."],
+["🪘","Folktales","Use a local or tribal tale as the doorway into the concept and link it to learners’ own culture."],
+["💬","Comics","Break the concept into panels and speech bubbles. Good for sequences, cause and effect, and misconceptions."],
+["🎨","Visual art (drawing, painting)","Let learners draw, paint or sketch the concept to show how they see it, not just recall it."],
+["🎭","Performing arts (drama, dance, role-play, mime)","Embody the concept with the body: act out processes, roles or relationships."],
+["🎵","Music and rhythm","Use songs, beats or rhymes to carry patterns, steps and key terms."],
+["🧶","Craft and 3D models","Build with clay, paper, waste material or fabric so learners can hold and explain the concept."],
+["💻","Digital arts (animation, digital storytelling)","Combine images, voice and motion in a short animation or digital story using free tools."]];
+const QS=[
+"Why did you choose this concept, and what do learners usually find hard about it?",
+"Why did you pick these methods, and why in this order?",
+"What will learners actually do, make or say at each step of the pathway?",
+"How will you know learners have understood the concept? What evidence will you look for?",
+"What challenges might you face while using this pathway, and how could you handle them?"];
+let path=[];const $=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+function grid(){const g=$("grid");g.textContent="";METHODS.forEach((m,i)=>{
+ const on=path.some(s=>s.i===i);const d=el("div","m"+(on?" on":""));
+ d.append(el("div","e",m[0]),el("b","",m[1]),el("p","",m[2]));
+ const b=el("button","",on?"Remove":"Add");b.onclick=()=>{if(on)path=path.filter(s=>s.i!==i);else path.push({i,note:"",files:[],link:""});grid();renderPath()};
+ d.append(b);g.append(d)})}
+function renderPath(){const p=$("path");p.textContent="";
+ if(!path.length){p.append(el("div","empty","No steps yet. Add components above to start your pathway."));return}
+ path.forEach((s,k)=>{const r=el("div","step");r.append(el("div","num",k+1));
+  const mid=el("div");mid.append(el("b","",METHODS[s.i][0]+" "+METHODS[s.i][1]));
+  const t=el("textarea");t.placeholder="What happens in this step? What will learners do?";t.value=s.note;t.oninput=()=>s.note=t.value;mid.append(t);mid.append(uploader(s));
+  const c=el("div","ctl");
+  [["↑",-1],["↓",1]].forEach(([l,d])=>{const b=el("button","g",l);b.onclick=()=>{const j=k+d;if(j<0||j>=path.length)return;[path[k],path[j]]=[path[j],path[k]];renderPath()};c.append(b)});
+  r.append(mid,c);p.append(r)})}
+function media(f){const w=el("div","fi");const u=String(f.url||"");if(u.indexOf("/_blob/")!==0)return w;const t=String(f.type||"");let m;
+if(t.indexOf("image")===0){m=el("img");m.alt=f.name||""}else if(t.indexOf("video")===0){m=el("video");m.controls=true}else if(t.indexOf("audio")===0){m=el("audio");m.controls=true}
+if(m){m.src=u;w.append(m)}w.append(el("div","",f.name||"file"));return w}
+function uploader(s){const u=el("div","up");u.append(el("p","lb","Optional: add your own image, video, audio or animation (GIF / MP4), max 20 MB each"));
+const fi=el("input");fi.type="file";fi.multiple=true;fi.accept="image/*,video/*,audio/*";const st=el("span","msg");
+fi.onchange=async()=>{const fs=[...fi.files];st.textContent="";for(const f of fs){if(f.size>20*1048576){st.textContent=f.name+" is over 20 MB. Add a link below instead.";continue}
+try{st.textContent="Uploading "+f.name+"…";const a=await claude.use("assets");if(!a)throw 0;const r=await a.upload(f);s.files.push({id:r.id,url:r.url,type:f.type||r.contentType,name:f.name});}
+catch(e){st.textContent="Could not upload "+f.name+". Paste a link below instead.";return}}renderPath()};
+u.append(fi,st);const fl=el("div","fl");s.files.forEach((f,k)=>{const w=media(f);const b=el("button","g","Remove");b.onclick=()=>{s.files.splice(k,1);renderPath()};w.append(b);fl.append(w)});u.append(fl);
+const l=el("input");l.type="url";l.placeholder="Or paste a link (YouTube, Google Drive, Canva…)";l.value=s.link||"";l.oninput=()=>s.link=l.value.trim();u.append(l);return u}
+function qs(){const q=$("qs");QS.forEach((t,i)=>{const d=el("div","q");d.append(el("b","",(i+1)+". "+t));const a=el("textarea");a.id="q"+i;d.append(a);q.append(d)})}
+function collect(){return{name:$("name").value.trim(),subject:$("subject").value.trim(),concept:$("concept").value.trim(),level:$("level").value.trim(),
+ pathway:path.map(s=>({method:METHODS[s.i][1],note:s.note,link:s.link||"",files:s.files})),answers:QS.map((t,i)=>({q:t,a:$("q"+i).value.trim()})),at:Date.now()}}
+function asText(r){return `Lesson pathway: ${r.name}\nSubject: ${r.subject} | Concept: ${r.concept} | Level: ${r.level}\n\nPathway:\n`+r.pathway.map((s,i)=>`${i+1}. ${s.method}: ${s.note}`+(s.link?` (link: ${s.link})`:"")+(s.files&&s.files.length?` (${s.files.length} file(s) uploaded)`:"")).join("\n")+"\n\nReflection:\n"+r.answers.map((x,i)=>`${i+1}. ${x.q}\n${x.a}`).join("\n\n")}
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(asText(collect()));$("status").textContent="Copied."}catch(e){$("status").textContent="Copy not available here."}};
+$("submit").onclick=async()=>{const r=collect();
+ if(!r.name||!r.pathway.length){$("status").textContent="Please add your name and at least one component.";return}
+ try{const db=await claude.use("db");if(!db)throw 0;
+  await db.collection("responses").doc("r"+r.at+"-"+Math.random().toString(36).slice(2,6)).set(r);
+  $("status").textContent="Submitted. Thank you, "+r.name+"!";
+ }catch(e){$("status").textContent="Could not submit here. Use “Copy as text” and send it to your coordinator."}};
+function show(f){$("player").classList.toggle("hide",f);$("fac").classList.toggle("hide",!f);if(f){history.replaceState(null,"","#facilitator");loadFac()}else history.replaceState(null,"",location.pathname)}
+$("tabP").onclick=()=>show(false);$("tabF").onclick=()=>show(true);
+let unsub=null;
+async function loadFac(){const b=$("facBody");if(unsub)return;
+ try{const u=await claude.use("user");const own=u?await u.isOwner():false;
+  if(!own){b.textContent="";b.append(el("p","msg","This view is for the coordinator who owns the page."));return}
+  const db=await claude.use("db");if(!db)throw 0;
+  unsub=db.collection("responses").onSnapshot(s=>{b.textContent="";b.append(el("p","msg",s.size+" response(s)"));
+   s.docs.map(d=>d.data()).sort((a,c)=>c.at-a.at).forEach(r=>{const d=el("div","resp");
+    d.append(el("h3","",String(r.name||"Anonymous")),el("div","",`${r.subject||""} · ${r.concept||""} · ${r.level||""}`));
+    (r.pathway||[]).forEach((x,i)=>d.append(el("span","pill",(i+1)+". "+x.method)));
+    (r.pathway||[]).forEach((x,i)=>{if(x.note)d.append(el("div","",(i+1)+". "+x.note));if(x.link&&String(x.link).indexOf("https://")===0){const a=el("a","","Link for step "+(i+1));a.href=x.link;a.target="_blank";a.rel="noopener";d.append(a)}if(x.files&&x.files.length){const fl=el("div","fl");x.files.forEach(f=>fl.append(media(f)));d.append(fl)}});
+    (r.answers||[]).forEach((x,i)=>{const q=el("div","q");q.append(el("b","",(i+1)+". "+x.q),el("div","",x.a||"–"));d.append(q)});
+    b.append(d)})},()=>{b.textContent="Could not load responses."})
+ }catch(e){b.textContent="Responses are not available in this view."}}
+grid();renderPath();qs();if(location.hash==="#facilitator")show(true);
+</script></body></html>
